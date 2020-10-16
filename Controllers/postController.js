@@ -73,14 +73,9 @@ export const updatePost = async(req, res) => {
                 message: "Unfortunately no Post Found"
             })
         }
-        const thing = new thing({
-            _id: req.params.id,
-            title: req.params.title,
-            body: req.params.body,
-            imageUrl: req.params.imageUrl
-        });
+        
 
-        const updatePost = await findPost.updateOne({_id: req.params.id}, thing);
+        const updatePost = await findPost.updateOne({...req.body});
         res.status(201).json({
             message: "Post Updated Successfully",
             updatePost
@@ -98,15 +93,15 @@ export const updatePost = async(req, res) => {
 //Delete Post 
 
 export const deletePost = async(req, res) => {
-        try {
-        findPosts = await Post.findOne({_id: req.params.id});
+    try {
+        const findPost = await Post.findOne({_id: req.params.id});
         if (!findPost){
             res.status(404).json({
                 message: "Unfortunately no Post Found"
             })
         }
 
-        await findPosts.deleteOne();
+        await findPost.deleteOne();
         res.status(200).json({
             message: "Deleted Post Successfully"
         })
