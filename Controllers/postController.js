@@ -1,5 +1,11 @@
 import Post from "../models/post.js";
 
+export const welcome = async (req, res) =>{
+    res.status(201).json({
+        message: "Welcome to my blogPost API"
+    })
+};
+
 // Create a Post 
 export const create = async (req, res) => {
     const { title, body } = req.body
