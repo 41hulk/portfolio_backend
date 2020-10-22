@@ -1,4 +1,4 @@
-import Post from "../models/post.js";
+import Post from "../Models/post.js";
 
 export const welcome = async (req, res) =>{
     res.status(201).json({
