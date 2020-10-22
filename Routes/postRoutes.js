@@ -15,8 +15,9 @@ const postRouter = express.Router();
 // postRouter.get("/getPost", getPost);
 // postRouter.get("/allPost",  findPosts);
 
-postRouter.route('/').post(create).get(findPosts);
-postRouter.route("/:id").delete(deletePost).get(getPost).patch(updatePost);
+postRouter.route('/').get(welcome);
+postRouter.route('/post').post(create).get(findPosts);
+postRouter.route("/post/:id").delete(deletePost).get(getPost).patch(updatePost);
 
 
 
