@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import "dotenv/config.js"
 
-mongoose.connect("mongodb://localhost/`portfolio_backend`", {
+mongoose.connect(process.env.DATABASE_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
