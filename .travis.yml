@@ -5,6 +5,9 @@ sudo: false
 node_js:  
       - 'stable'
 
+services:
+  - mongodb     
+
 # install:
 #       - npm ci
       
