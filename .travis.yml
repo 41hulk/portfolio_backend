@@ -1,0 +1,22 @@
+language: node_js
+
+sudo: false
+
+node_js:  
+      - 'stable'
+
+services:
+  - mongodb     
+
+# install:
+#       - npm ci
+      
+env:
+  - PORT=4000
+
+script:
+  - npm ci
+  - npm test
+
+notifications:
+  email: false
