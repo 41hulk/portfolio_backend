@@ -5,8 +5,8 @@ sudo: false
 node_js:  
       - 'stable'
 
-install:
-      - npm ci
+# install:
+#       - npm ci
       
 env:
   - PORT=4000
