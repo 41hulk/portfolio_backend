@@ -11,9 +11,9 @@ install:
 env:
   - PORT=4000
 
-notification:
-          - email: false
-script: 
-      -npm test:coveralls
-      -npm run coverage
-
+script:
+  - npm ci
+  - npm test:coveralls
+  - npm run cover
+notifications:
+  email: false
