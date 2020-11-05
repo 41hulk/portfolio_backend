@@ -29,118 +29,64 @@ describe('POST API TEST', () => {
 
 
     describe('CRUD A POST', () => {
-
-            // // CREATE a Post
-            // it('it should POST a Blog ', () => {
-            //     chai.request(app)
-            //         .post("/api/post")
-            //         .send(testPost)
-            //         .end((err, res) => {
-            //             res.should.have.status(201);
-            //             res.body.should.be.a('object');
-            //             res.body.should.have.property('message').eql('Success Created');
-            //             res.body.book.should.have.property('title');
-            //             res.body.book.should.have.property('body');
-            //             done();
-            //         });
-            // });
             
-            //GET all Post
-            // it('It should GET all the Blog', () =>{
-            //     chai.request(app)
-            //         .get(`api/post`)
-            //         .end((err, res) => {
-            //             console.log(res);
-            //             res.should.have.status(200);
-            //             res.body.should.be.a('array');
-            //             res.body.length.should.be.eql(0);
-            //         done();
-            //         })
-            // });
+            it('it should display the welcome message', async () => {
+                const res = await chai.request(app).get("/api");
+                expect(res.status).to.be.equal(201);
+                expect(res.body).to.have.property('message', 'Welcome to my blogPost API');
+
+            });
+
+            it('it should CREATE a blog', async () => {
+                const res = await chai.request(app).post("/api/post").send(testPost);
+                expect(res.status).to.be.equal(201);
+                expect(res.body).to.have.property('message', 'Success Created');
+                expect(res).to.be.json;
+            });
+            
+            // Get all blog
 
             it('it should GET all the blog', async () => {
                 const res = await chai.request(app).get("/api/post").send(testPost);
                 expect(res.status).to.be.equal(201);
+                expect(res).to.be.json;
         
-              });
-
-            // // GET a post using ID
-         
-            // it('It should get one blog', () => {
-            //     const postId = 1;
-            //     chai.request(app)
-            //         .get(`/api/post/${postId}`)
-            //         .end((err,res) => {
-            //             res.should.have.status(200);
-            //             res.body.should.be.a('array');
-            //         done();    
-            //     })
-            // });
-
+        });
+            // Get one post
             it('Should get one post', async () => {
                 const post = await Post.create(testPost);
                 await post.save();
                 const res = await chai.request(app).get(`/api/post/${post._id}`);
                 expect(res.status).to.be.equal(201);
-                
+                expect(res).to.be.json;
+        
             });
-            // // UPDATE a Post
 
-
-            // it('It should update a post', () => {
-            //     const postId = 1
-            //     const newpost = {
-            //         title: "Hello world",
-            //         body: "Test Hello world"
-            //     }
-
-            //     chai.request(app)
-            //         .patch(`/api/post/${postId}`)
-            //         .send(newpost)
-            //         .end((err,res) => {
-            //             res.should.have.status(201);
-            //             res.body.should.have.property('message').eql('Post Updated Successfully');
-            //             res.body.book.should.have.property('title');
-            //             res.body.book.should.have.property('body');
-            //         done();
-            //         })
-            // })
-            // // DELETE a post 
-
-            // it('It should delete a post', () => {
-            //     const postId = 1;
-            //     chai.request(app)
-            //         .patch(`/api/post/${postId}`)
-            //         .end((err,res) => {
-            //             res.should.have.status(201);
-            //             res.body.should.have.property('message').eql('Deleted Post Successfully');
-            //             res.body.book.should.be('object');
-                        
-            //         done();
-            //         })
-            // });
-
+            //UPDATE a Post
+            
+            it('Should update a post', async () => {
+                const patchPost = {
+                    title: 'updated title',
+                    body: 'updated body',
+                };
+                const post = await Post.create(testPost);
+                await post.save();
+            
+                const res = await chai.request(app).patch(`/api/post/${post._id}`).send(patchPost);
+                expect(res.status).to.be.equal(201);
+                expect(res).to.be.json;
+                expect(res.body).to.have.property('message', 'Post Updated Successfully');
+            });
+            // DELETE a post 
             it('Should get delete one post', async () => {
                 const post = await Post.create(testPost);
                 await post.save();
                 const res = await chai.request(app).delete(`/api/post/${post._id}`);
                 expect(res.status).to.be.equal(200);
+                expect(res).to.be.json;
                 
             });
 
-            
-
-
-            
-
-
-        });
-    
-
-    
-
-
-
-    
+    });
 
 });
