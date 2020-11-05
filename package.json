@@ -2,13 +2,12 @@
   "name": "portfolio_backend",
   "version": "1.0.0",
   "description": "Blog Backend which executes CRUD functions ",
-  "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "babel-node app.js",
+    "dev": "nodemon --exec babel-node app.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": "NODE_ENV=test mocha ./Test/blog-test.js --exit",
+    "test": "NODE_ENV=test mocha ./Test/blog-test.js --require @babel/register --exit",
     "coverage": "nyc npm run test"
   },
   "repository": {
@@ -22,6 +21,11 @@
   },
   "homepage": "https://github.com/41hulk/portfolio_backend#readme",
   "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.6",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
